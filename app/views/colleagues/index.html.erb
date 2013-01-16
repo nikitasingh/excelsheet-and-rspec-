@@ -1,0 +1,41 @@
+<a href=# class="colorbox">
+  <%= image_tag("flower.png", :size => "60x60",:alt => "odc decoration") %>
+</a>
+
+<h1>Listing colleagues</h1>
+<%= link_to 'Export', colleagues_path(request.parameters.merge({:format => :xls})) %>
+
+ <%= link_to "CSV", colleagues_path(format: "csv") %> |
+  <%= link_to "Excel", colleagues_path(format: "xls") %>
+
+  <%= link_to 'Create a new company',
+         new_colleague_path, 
+        :onclick=>"window.open(this.href,'create_colleague', 'height=600, width=600');return false;" 
+%>
+
+
+<table>
+  <tr>
+    <th>First name</th>
+    <th>Last name</th>
+    <th>Middle name</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @colleagues.each do |colleague| %>
+  <tr>
+    <td><%= colleague.first_name %></td>
+    <td><%= colleague.last_name %></td>
+    <td><%= colleague.middle_name %></td>
+    <td><%= link_to 'Show', colleague %></td>
+    <td><%= link_to 'Edit', edit_colleague_path(colleague) %></td>
+    <td><%= link_to 'Destroy', colleague, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Colleague', new_colleague_path %>
